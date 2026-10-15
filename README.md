@@ -2,6 +2,30 @@
 
 A 2-hour lab that builds a human-in-the-loop pull-request review agent in **LangGraph**, end-to-end.
 
+## Running this solution
+
+From the repository root, run `uv sync`, copy `.env.example` to `.env`, and fill in
+your own LLM key, GitHub token, and `GITHUB_USER`. The example defaults to OpenRouter
+and includes settings for using an OpenAI key directly. On PowerShell, use
+`Copy-Item .env.example .env` to create the configuration file.
+
+Run the four exercise commands below or start the UI with
+`uv run streamlit run app.py`. The UI keeps the active thread in the URL and can
+restore a saved session from the Recent sessions table. Approve and the automatic
+branch post real GitHub comments; submitting escalation answers also posts the
+refined review. Reject and Edit finish without posting; Edit records feedback and
+does not implement the optional auto-rewrite bonus.
+
+Run the offline checks with `uv run python -m unittest discover -s tests -q`.
+These tests use real graph/checkpoint/audit code and mock only the GitHub and LLM
+calls. Production code always fetches the requested PR and asks the configured
+model; confidence and review contents are not preassigned. Analyzer prompts do
+not prescribe score bands. Actual model scores may route the demo PRs differently
+from the expected examples; passing offline tests does not establish that live
+demo checkpoint or confirm a successful real GitHub post.
+
+SQLite checkpoints and audit data stay local and are excluded from Git.
+
 > 1. Agent reads a PR, analyzes code changes, proposes review comments.
 > 2. Confidence ~72% → show diff + reasoning → user approves → agent commits the review.
 > 3. Confidence ~58% → escalate: show context + specific questions for the reviewer.

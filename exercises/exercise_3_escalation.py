@@ -53,7 +53,7 @@ def node_analyze(state):
                 "Explain the confidence you choose. Do not invent missing context "
                 "or target a particular score or routing branch. "
                 f"When confidence < {ESCALATE_THRESHOLD}, populate "
-                "escalation_questions with 2?4 specific questions about missing "
+                "escalation_questions with 2 to 4 specific questions about missing "
                 "context. Reference actual files and functions from the diff and "
                 "explain what the reviewer needs to clarify. "
             )},

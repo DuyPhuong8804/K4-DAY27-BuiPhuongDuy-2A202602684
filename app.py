@@ -187,7 +187,7 @@ def main():
     with st.form("start"):
         pr_url = st.text_input(
             "PR URL", key="pr_url_input",
-            placeholder="https://github.com/VinUni-AI20k/PR-Demo/pull/1",
+            placeholder="https://github.com/owner/repo/pull/123",
         )
         submitted = st.form_submit_button("Run review", type="primary")
     if submitted:
